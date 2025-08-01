@@ -10,8 +10,9 @@ class Entity(ABC):
     def __init__(self, name: str, position: tuple):
         self.window_size = (WIN_WIDTH, WIN_HEIGHT)
         self.name = name
-        self.surf = pygame.transform.scale(pygame.image.load('./assets/' + name + '.png'), self.window_size)
+        self.surf = pygame.image.load('./assets/' + name + '.png').convert_alpha()
         self.rect = self.surf.get_rect(left=0, top=0)
+        self.image_width = self.surf.get_width()
         self.speed = 0
 
     @abstractmethod

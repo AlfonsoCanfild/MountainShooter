@@ -61,9 +61,9 @@ class Menu:
             # executa o texto do menu
             for i in range(len(MENU_OPTION)):
                 if i == menu_option:
-                    self.menu_text(25, MENU_OPTION[i], COLOR_CYAN, ((WIN_WIDTH / 2), 340 + 30 * i))
+                    self.menu_text(22, MENU_OPTION[i], COLOR_CYAN, ((WIN_WIDTH / 2), 190 + 30 * i))
                 else:
-                    self.menu_text(25, MENU_OPTION[i], COLOR_WHITE, ((WIN_WIDTH / 2), 340 + 30 * i))
+                    self.menu_text(22, MENU_OPTION[i], COLOR_WHITE, ((WIN_WIDTH / 2), 190 + 30 * i))
 
             pygame.display.update()
             self.clock.tick(60)

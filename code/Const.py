@@ -1,5 +1,5 @@
-WIN_WIDTH = 720
-WIN_HEIGHT = 500
+WIN_WIDTH = 576
+WIN_HEIGHT = 324
 
 MENU_SOUND = "assets/menu_sound.mp3"
 

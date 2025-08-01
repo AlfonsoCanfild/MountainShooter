@@ -21,15 +21,12 @@ class Level:
 
             for bg in self.entity_list:
                 bg.move()
-
-            # reposiciona fundos que saíram da tela, colando depois do último fundo
-            for bg in self.entity_list:
-                if bg.rect.right <= 0:
-                    rightmost = max(self.entity_list, key=lambda b: b.rect.right)
-                    bg.rect.left = rightmost.rect.right
-
-            for bg in self.entity_list:
                 self.window.blit(bg.surf, bg.rect)
+
+                # Desenha a segunda cópia da imagem, lado a lado
+                second_rect = bg.rect.copy()
+                second_rect.x += bg.image_width
+                self.window.blit(bg.surf, second_rect)
 
             pygame.display.update()
             clock.tick(60)
