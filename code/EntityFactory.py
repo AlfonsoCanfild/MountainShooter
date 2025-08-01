@@ -1,7 +1,6 @@
 import pygame
 
 from code.Background import Background
-from code.Const import WIN_WIDTH
 
 
 class EntityFactory:
@@ -16,5 +15,5 @@ class EntityFactory:
                     image_width = img.get_width()
                     for i in range(2):  # duas cópias
                         x = i * image_width
-                        list_bg.append(Background(f'Level1BG{layer}', (x, 0), speed=layer + 1))
+                        list_bg.append(Background(f'Level1BG{layer}', (x, 0)))
                 return list_bg

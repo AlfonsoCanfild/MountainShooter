@@ -1,5 +1,6 @@
 import pygame.display
 
+from code.Const import LEVEL_SOUND
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 
@@ -14,6 +15,12 @@ class Level:
         self.entity_list.extend(EntityFactory.get_entity('Level1BG'))
 
     def run(self):
+        pygame.mixer.music.stop()  # para a música do menu
+        # CARREGA a nova música da fase
+        pygame.mixer.music.load(LEVEL_SOUND)  # troque pelo nome da sua música
+        pygame.mixer.music.set_volume(0.5)
+        pygame.mixer.music.play(-1)  # -1 para repetir
+
         clock = pygame.time.Clock()
 
         while True:
