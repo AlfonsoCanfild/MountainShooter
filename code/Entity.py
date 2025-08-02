@@ -11,7 +11,7 @@ class Entity(ABC):
         self.window_size = (WIN_WIDTH, WIN_HEIGHT)
         self.name = name
         self.surf = pygame.image.load('./assets/' + name + '.png').convert_alpha()
-        self.rect = self.surf.get_rect(left=0, top=0)
+        self.rect = self.surf.get_rect(topleft=position)
         self.image_width = self.surf.get_width()
         self.speed = 0
 
