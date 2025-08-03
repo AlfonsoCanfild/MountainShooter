@@ -1,11 +1,9 @@
-import random
-
-import pygame
-
 from code.Background import Background
-from code.Const import WIN_HEIGHT, WIN_WIDTH
-from code.Enemy import Enemy
+from code.Const import WIN_HEIGHT, WIN_WIDTH, MARGIN
 from code.Player import Player
+from code.Enemy import Enemy
+import pygame
+import random
 
 
 class EntityFactory:
@@ -22,12 +20,23 @@ class EntityFactory:
                         x = i * image_width
                         list_bg.append(Background(f'Level1BG{layer}', (x, 0)))
                 return list_bg
-            case 'Ship_Player1':
-                return [Player('Ship_Player1', (20, 90))]
-            case 'Ship_Player2':
-                return [Player('Ship_Player2', (20, 160))]
-            case 'Ship_Enemy1':
-                return [Enemy('Ship_Enemy1', (WIN_WIDTH, random.randint(0, WIN_HEIGHT)))]
-            case 'Ship_Enemy2':
-                return [Enemy('Ship_Enemy2', (WIN_WIDTH, random.randint(0, WIN_HEIGHT)))]
 
+            case 'Ship_Player1':
+                return [Player('Ship_Player1', (MARGIN, 90))]
+
+            case 'Ship_Player2':
+                return [Player('Ship_Player2', (MARGIN, 160))]
+
+            case 'Ship_Enemy1':
+                # Cria uma instância temporária só pra pegar a altura da imagem
+                temp_enemy = Enemy('Ship_Enemy1', (0, 0))
+                enemy_height = temp_enemy.rect.height
+                y = random.randint(MARGIN, WIN_HEIGHT - enemy_height - MARGIN)
+                return [Enemy('Ship_Enemy1', (WIN_WIDTH, y))]
+
+            case 'Ship_Enemy2':
+                # Cria uma instância temporária só pra pegar a altura da imagem
+                temp_enemy = Enemy('Ship_Enemy2', (0, 0))
+                enemy_height = temp_enemy.rect.height
+                y = random.randint(MARGIN, WIN_HEIGHT - enemy_height - MARGIN)
+                return [Enemy('Ship_Enemy2', (WIN_WIDTH, y))]

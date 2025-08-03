@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 import pygame.image
 
-from code.Const import WIN_WIDTH, WIN_HEIGHT
+from code.Const import WIN_WIDTH, WIN_HEIGHT, ENTITY_HEALTH
 
 
 class Entity(ABC):
@@ -14,6 +14,7 @@ class Entity(ABC):
         self.rect = self.surf.get_rect(topleft=position)
         self.image_width = self.surf.get_width()
         self.speed = 0
+        self.health = ENTITY_HEALTH[self.name]
 
     @abstractmethod
     def move(self):
