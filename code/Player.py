@@ -28,5 +28,10 @@ class Player(Entity):
     def shot(self):
         pressed_key = pygame.key.get_pressed()
         if pressed_key[PLAYER_KEY_SHOT[self.name]]:
-            return PlayerShot(name=f'{self.name}_Shot', position=(self.rect.centerx,
-                                                                  self.rect.centery))
+            offset_x = 11  # ajuste fino para o que tiro saia da nave
+            offset_y = 5  # ajuste fino para o que tiro saia da nave
+            return PlayerShot(
+                name=f'{self.name}_Shot',
+                position=(self.rect.right - offset_x, self.rect.centery + offset_y)
+            )
+
