@@ -12,6 +12,7 @@ from code.Enemy import Enemy
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
+from code.Explosion import Explosion
 from code.Player import Player
 
 

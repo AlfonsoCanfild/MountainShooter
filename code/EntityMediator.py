@@ -2,6 +2,7 @@ from code.Const import WIN_WIDTH
 from code.Enemy import Enemy
 from code.EnemyShot import EnemyShot
 from code.Entity import Entity
+from code.EntityFactory import EntityFactory
 from code.Player import Player
 from code.PlayerShot import PlayerShot
 
@@ -61,8 +62,13 @@ class EntityMediator:
 
     @staticmethod
     def verify_healthy(entity_list: list[Entity]):
-        for ent in entity_list:
+        for ent in entity_list[:]:  # copia da lista
             if ent.health <= 0:
                 if isinstance(ent, Enemy):
                     EntityMediator.__give_score(ent, entity_list)
+
+                # Cria a explosão no local da entidade destruída
+                explosion = EntityFactory.get_explosion(ent.rect.center)
+                entity_list.append(explosion)
+
                 entity_list.remove(ent)

@@ -1,5 +1,6 @@
 from code.Background import Background
 from code.Const import WIN_HEIGHT, WIN_WIDTH, MARGIN
+from code.Explosion import Explosion
 from code.Player import Player
 from code.Enemy import Enemy
 import pygame
@@ -40,3 +41,12 @@ class EntityFactory:
                 enemy_height = temp_enemy.rect.height
                 y = random.randint(MARGIN, WIN_HEIGHT - enemy_height - MARGIN)
                 return [Enemy('Ship_Enemy2', (WIN_WIDTH, y))]
+
+    @staticmethod
+    def get_explosion(position: tuple):
+        frames = []
+        for i in range(1, 6):
+            frame = pygame.image.load(f'./assets/explosion/explosion{i}.png').convert_alpha()
+            frames.append(frame)
+        return Explosion(position, frames)
+
