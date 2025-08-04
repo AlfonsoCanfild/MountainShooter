@@ -1,7 +1,7 @@
 import pygame.key
 
 from code.Const import ENTITY_SPEED, WIN_HEIGHT, WIN_WIDTH, PLAYER_KEY_UP, PLAYER_KEY_DOWN, \
-    PLAYER_KEY_LEFT, PLAYER_KEY_RIGHT, PLAYER_KEY_SHOT
+    PLAYER_KEY_LEFT, PLAYER_KEY_RIGHT, PLAYER_KEY_SHOT, ENTITY_SHOT_DELAY
 from code.Entity import Entity
 from code.PlayerShot import PlayerShot
 
@@ -9,6 +9,7 @@ from code.PlayerShot import PlayerShot
 class Player(Entity):
     def __init__(self, name: str, position: tuple):
         super().__init__(name, position)
+        self.shot_delay = ENTITY_SHOT_DELAY[self.name]
 
     def update(self):
         pass
@@ -26,12 +27,15 @@ class Player(Entity):
         pass
 
     def shot(self):
-        pressed_key = pygame.key.get_pressed()
-        if pressed_key[PLAYER_KEY_SHOT[self.name]]:
-            offset_x = 11  # ajuste fino para o que tiro saia da nave
-            offset_y = 5  # ajuste fino para o que tiro saia da nave
-            return PlayerShot(
-                name=f'{self.name}_Shot',
-                position=(self.rect.right - offset_x, self.rect.centery + offset_y)
-            )
+        self.shot_delay -= 1
+        if self.shot_delay == 0:
+            self.shot_delay = ENTITY_SHOT_DELAY[self.name]
+            pressed_key = pygame.key.get_pressed()
+            if pressed_key[PLAYER_KEY_SHOT[self.name]]:
+                offset_x = 90  # ajuste fino para o que tiro saia da nave
+                offset_y = - 8  # ajuste fino para o que tiro saia da nave
+                return PlayerShot(
+                    name=f'{self.name}_Shot',
+                    position=(self.rect.left + offset_x, self.rect.centery - offset_y)
+                )
 

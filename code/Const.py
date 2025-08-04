@@ -1,6 +1,6 @@
-# C
 import pygame
 
+# C
 COLOR_ORANGE = 255, 128, 0
 COLOR_CYAN = 0, 255, 255
 COLOR_WHITE = 255, 255, 255
@@ -16,13 +16,14 @@ ENTITY_SPEED = {
     'Level1BG6': 6,
 
     'Ship_Player1': 3,
-    'Ship_Player1_Shot': 1,
+    'Ship_Player1_Shot': 4,
     'Ship_Player2': 3,
-    'Ship_Player2_Shot': 1,
+    'Ship_Player2_Shot': 4,
+
     'Ship_Enemy1': 1,
-    'Ship_Enemy1_Shot': 1,
+    'Ship_Enemy1_Shot': 2,
     'Ship_Enemy2': 2,
-    'Ship_Enemy2_Shot': 1,
+    'Ship_Enemy2_Shot': 3,
 }
 
 ENTITY_HEALTH = {
@@ -35,17 +36,26 @@ ENTITY_HEALTH = {
     'Level1BG6': 999,
 
     'Ship_Player1': 300,
-    'Ship_Player1_Shot': 30,
+    'Ship_Player1_Shot': 1,
     'Ship_Player2': 300,
-    'Ship_Player2_Shot': 30,
+    'Ship_Player2_Shot': 1,
 
     'Ship_Enemy1': 50,
-    'Ship_Enemy1_Shot': 10,
+    'Ship_Enemy1_Shot': 1,
     'Ship_Enemy2': 80,
-    'Ship_Enemy2_Shot': 10,
+    'Ship_Enemy2_Shot': 1,
 }
 
 EVENT_ENEMY = pygame.USEREVENT + 1
+
+EVENT_ENEMY_SHOT = pygame.USEREVENT + 2
+
+ENTITY_SHOT_DELAY = {
+    'Ship_Player1': 10,
+    'Ship_Player2': 10,
+    'Ship_Enemy1': 3000,
+    'Ship_Enemy2': 4000,
+}
 
 # F
 FONT_TYPE = "Lucida Sans Typewriter"
