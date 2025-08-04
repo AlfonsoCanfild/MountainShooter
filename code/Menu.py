@@ -3,7 +3,7 @@ from pygame import Surface, Rect
 from pygame.font import Font
 
 from code.Const import WIN_WIDTH, WIN_HEIGHT, MENU_SOUND, MENU_OPTION, \
-    COLOR_WHITE, COLOR_CYAN, FONT_TYPE
+    C_WHITE, C_CYAN, FONT_TYPE
 
 
 class Menu:
@@ -61,9 +61,9 @@ class Menu:
             # executa o texto do menu
             for i in range(len(MENU_OPTION)):
                 if i == menu_option:
-                    self.menu_text(20, MENU_OPTION[i], COLOR_CYAN, ((WIN_WIDTH / 2), 190 + 30 * i))
+                    self.menu_text(20, MENU_OPTION[i], C_CYAN, ((WIN_WIDTH / 2), 190 + 30 * i))
                 else:
-                    self.menu_text(20, MENU_OPTION[i], COLOR_WHITE, ((WIN_WIDTH / 2), 190 + 30 * i))
+                    self.menu_text(20, MENU_OPTION[i], C_WHITE, ((WIN_WIDTH / 2), 190 + 30 * i))
 
             pygame.display.update()
             self.clock.tick(60)

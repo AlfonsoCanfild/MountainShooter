@@ -6,7 +6,8 @@ from pygame import Surface, Rect
 from pygame.font import Font
 
 from code.Background import Background
-from code.Const import LEVEL_SOUND, COLOR_WHITE, WIN_HEIGHT, FONT_TYPE, MENU_OPTION, EVENT_ENEMY
+from code.Const import LEVEL_SOUND, C_WHITE, WIN_HEIGHT, FONT_TYPE, MENU_OPTION, EVENT_ENEMY, \
+    C_GREEN
 from code.Enemy import Enemy
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
@@ -65,6 +66,15 @@ class Level:
                         self.entity_list.remove(ent)
                         continue
 
+                    # Mostra na tela a vida dos jogadores
+                    if ent.name == 'Ship_Player1':
+                        self.level_text(14, f'Player1 - Health: {ent.health} | Score: {ent.score}',
+                                        C_GREEN,
+                                        (10, 30))
+                    if ent.name == 'Ship_Player2':
+                        self.level_text(14, f'Player2 - Health: {ent.health} | Score: {ent.score}',
+                                        C_GREEN, (10, 45))
+
                     self.window.blit(ent.surf, ent.rect)
 
             for event in pygame.event.get():
@@ -77,10 +87,11 @@ class Level:
 
             # printando o texto na tela
             self.level_text(14, f'{self.name} - Timeout: {self.timeout / 1000:.1f}s',
-                            COLOR_WHITE, (10, 5))
-            self.level_text(14, f'fps: {clock.get_fps():.0f}', COLOR_WHITE, (10, WIN_HEIGHT - 35))
-            self.level_text(14, f'entidades: {len(self.entity_list) - 8}', COLOR_WHITE, (10,
-                                                                                         WIN_HEIGHT - 20))
+                            C_WHITE, (10, 5))
+            self.level_text(14, f'fps: {clock.get_fps():.0f}', C_WHITE, (10, WIN_HEIGHT - 35))
+            self.level_text(14, f'entidades: {len(self.entity_list) - 8}', C_WHITE, (10,
+                                                                                     WIN_HEIGHT -
+                                                                                     20))
             # verificar as colisões
             EntityMediator.verify_collision(entity_list=self.entity_list)
             EntityMediator.verify_healthy(entity_list=self.entity_list)

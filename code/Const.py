@@ -1,9 +1,11 @@
 import pygame
 
 # C
-COLOR_ORANGE = 255, 128, 0
-COLOR_CYAN = 0, 255, 255
-COLOR_WHITE = 255, 255, 255
+C_ORANGE = 255, 128, 0
+C_CYAN = 0, 206, 209
+C_WHITE = 255, 255, 255
+C_GREEN = 0, 255, 0
+C_BLUE = 0, 0, 255
 
 # E
 ENTITY_SPEED = {
@@ -44,6 +46,46 @@ ENTITY_HEALTH = {
     'Ship_Enemy1_Shot': 1,
     'Ship_Enemy2': 80,
     'Ship_Enemy2_Shot': 1,
+}
+
+ENTITY_DAMAGE = {
+    'Level1BG0': 0,
+    'Level1BG1': 0,
+    'Level1BG2': 0,
+    'Level1BG3': 0,
+    'Level1BG4': 0,
+    'Level1BG5': 0,
+    'Level1BG6': 0,
+
+    'Ship_Player1': 1,
+    'Ship_Player1_Shot': 25,
+    'Ship_Player2': 1,
+    'Ship_Player2_Shot': 25,
+
+    'Ship_Enemy1': 1,
+    'Ship_Enemy1_Shot': 20,
+    'Ship_Enemy2': 1,
+    'Ship_Enemy2_Shot': 30,
+}
+
+ENTITY_SCORE = {
+    'Level1BG0': 0,
+    'Level1BG1': 0,
+    'Level1BG2': 0,
+    'Level1BG3': 0,
+    'Level1BG4': 0,
+    'Level1BG5': 0,
+    'Level1BG6': 0,
+
+    'Ship_Player1': 0,
+    'Ship_Player1_Shot': 0,
+    'Ship_Player2': 0,
+    'Ship_Player2_Shot': 0,
+
+    'Ship_Enemy1': 100,
+    'Ship_Enemy1_Shot': 0,
+    'Ship_Enemy2': 200,
+    'Ship_Enemy2_Shot': 0,
 }
 
 EVENT_ENEMY = pygame.USEREVENT + 1
