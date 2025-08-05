@@ -55,28 +55,34 @@ class Level:
 
             # Agora desenha as outras entidades (ex: jogador)
             for ent in self.entity_list[:]:  # cópia da lista para poder remover
-                if not isinstance(ent, Background):
-                    ent.move()
-                    if isinstance(ent, (Player, Enemy)):
-                        shot = ent.shot()
-                        if shot is not None:
-                            self.entity_list.append(shot)
+                if isinstance(ent, Background):
+                    continue
 
-                    # Se saiu da tela pela esquerda, remove da lista
-                    if ent.rect.right <= 0:
-                        self.entity_list.remove(ent)
-                        continue
+                ent.move()  # move tudo que não for background
 
-                    # Mostra na tela a vida dos jogadores
-                    if ent.name == 'Ship_Player1':
-                        self.level_text(14, f'Player1 - Health: {ent.health} | Score: {ent.score}',
-                                        C_GREEN,
-                                        (10, 30))
-                    if ent.name == 'Ship_Player2':
-                        self.level_text(14, f'Player2 - Health: {ent.health} | Score: {ent.score}',
-                                        C_GREEN, (10, 45))
+                if isinstance(ent, Explosion) and ent.finished:
+                    self.entity_list.remove(ent)
+                    continue
 
-                    self.window.blit(ent.surf, ent.rect)
+                if isinstance(ent, (Player, Enemy)):
+                    shot = ent.shot()
+                    if shot is not None:
+                        self.entity_list.append(shot)
+
+                # Se saiu da tela pela esquerda, remove da lista
+                if ent.rect.right <= 0:
+                    self.entity_list.remove(ent)
+                    continue
+
+                # Mostrar a vida dos jogadores
+                if ent.name == 'Ship_Player1':
+                    self.level_text(14, f'Player1 - Health: {ent.health} | Score: {ent.score}',
+                                    C_GREEN, (10, 30))
+                if ent.name == 'Ship_Player2':
+                    self.level_text(14, f'Player2 - Health: {ent.health} | Score: {ent.score}',
+                                    C_GREEN, (10, 45))
+
+                self.window.blit(ent.surf, ent.rect)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
