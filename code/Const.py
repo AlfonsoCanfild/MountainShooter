@@ -13,9 +13,11 @@ ENTITY_SPEED = {
     'Level1BG1': 1,
     'Level1BG2': 2,
     'Level1BG3': 3,
-    'Level1BG4': 4,
-    'Level1BG5': 5,
-    'Level1BG6': 6,
+
+    'Level2BG0': 0,
+    'Level2BG1': 1,
+    'Level2BG2': 2,
+    'Level2BG3': 3,
 
     'Ship_Player1': 3,
     'Ship_Player1_Shot': 4,
@@ -23,9 +25,9 @@ ENTITY_SPEED = {
     'Ship_Player2_Shot': 4,
 
     'Ship_Enemy1': 1,
-    'Ship_Enemy1_Shot': 2,
+    'Ship_Enemy1_Shot': 3,
     'Ship_Enemy2': 2,
-    'Ship_Enemy2_Shot': 3,
+    'Ship_Enemy2_Shot': 4,
 }
 
 ENTITY_HEALTH = {
@@ -33,9 +35,11 @@ ENTITY_HEALTH = {
     'Level1BG1': 999,
     'Level1BG2': 999,
     'Level1BG3': 999,
-    'Level1BG4': 999,
-    'Level1BG5': 999,
-    'Level1BG6': 999,
+
+    'Level2BG0': 999,
+    'Level2BG1': 999,
+    'Level2BG2': 999,
+    'Level2BG3': 999,
 
     'Ship_Player1': 300,
     'Ship_Player1_Shot': 1,
@@ -53,9 +57,11 @@ ENTITY_DAMAGE = {
     'Level1BG1': 0,
     'Level1BG2': 0,
     'Level1BG3': 0,
-    'Level1BG4': 0,
-    'Level1BG5': 0,
-    'Level1BG6': 0,
+
+    'Level2BG0': 0,
+    'Level2BG1': 0,
+    'Level2BG2': 0,
+    'Level2BG3': 0,
 
     'Ship_Player1': 1,
     'Ship_Player1_Shot': 25,
@@ -63,9 +69,9 @@ ENTITY_DAMAGE = {
     'Ship_Player2_Shot': 25,
 
     'Ship_Enemy1': 1,
-    'Ship_Enemy1_Shot': 20,
+    'Ship_Enemy1_Shot': 30,
     'Ship_Enemy2': 1,
-    'Ship_Enemy2_Shot': 30,
+    'Ship_Enemy2_Shot': 50,
 }
 
 ENTITY_SCORE = {
@@ -73,9 +79,11 @@ ENTITY_SCORE = {
     'Level1BG1': 0,
     'Level1BG2': 0,
     'Level1BG3': 0,
-    'Level1BG4': 0,
-    'Level1BG5': 0,
-    'Level1BG6': 0,
+
+    'Level2BG0': 0,
+    'Level2BG1': 0,
+    'Level2BG2': 0,
+    'Level2BG3': 0,
 
     'Ship_Player1': 0,
     'Ship_Player1_Shot': 0,
@@ -92,6 +100,8 @@ EVENT_ENEMY = pygame.USEREVENT + 1
 
 EVENT_ENEMY_SHOT = pygame.USEREVENT + 2
 
+EVENT_TIMEOUT = pygame.USEREVENT + 2
+
 ENTITY_SHOT_DELAY = {
     'Ship_Player1': 10,
     'Ship_Player2': 10,
@@ -102,12 +112,8 @@ ENTITY_SHOT_DELAY = {
 # F
 FONT_TYPE = "Lucida Sans Typewriter"
 
-# L
-LEVEL_SOUND = "./assets/menu_level.mp3"
-
 # M
 MARGIN = 10
-MENU_SOUND = "./assets/menu_sound.mp3"
 MENU_OPTION = ("NEW GAME 1P",
                "NEW GAME 2P - COOPERATIVE",
                "NEW GAME 2P - COMPETITIVE",
@@ -125,6 +131,16 @@ PLAYER_KEY_RIGHT = {'Ship_Player1': pygame.K_RIGHT,
                     'Ship_Player2': pygame.K_d}
 PLAYER_KEY_SHOT = {'Ship_Player1': pygame.K_SPACE,
                    'Ship_Player2': pygame.K_LCTRL}
+
+# S
+MENU_SOUND = "./assets/menu_sound.mp3"
+
+LEVEL_SOUND = "./assets/menu_level.mp3"
+
+# T
+TIMEOUT_STEP = 100
+
+TIMEOUT_LEVEL = 30000
 
 # W
 WIN_WIDTH = 576

@@ -12,7 +12,7 @@ class EntityFactory:
     @staticmethod
     def get_entity(entity_name: str, position=(0, 0)):
         match entity_name:
-            case 'Level1BG':
+            case 'Level1BG':  # LEVEL 1
                 list_bg = []
                 for layer in range(4):
                     img = pygame.image.load(f'./assets/Level1BG{layer}.png').convert_alpha()
@@ -20,6 +20,16 @@ class EntityFactory:
                     for i in range(2):  # duas cópias do fundo
                         x = i * image_width
                         list_bg.append(Background(f'Level1BG{layer}', (x, 0)))
+                return list_bg
+
+            case 'Level2BG':  # LEVEL 2
+                list_bg = []
+                for layer in range(4):
+                    img = pygame.image.load(f'./assets/Level2BG{layer}.png').convert_alpha()
+                    image_width = img.get_width()
+                    for i in range(2):  # duas cópias do fundo
+                        x = i * image_width
+                        list_bg.append(Background(f'Level2BG{layer}', (x, 0)))
                 return list_bg
 
             case 'Ship_Player1':
@@ -49,4 +59,3 @@ class EntityFactory:
             frame = pygame.image.load(f'./assets/explosion/explosion{i}.png').convert_alpha()
             frames.append(frame)
         return Explosion(position, frames)
-
