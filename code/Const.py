@@ -1,5 +1,9 @@
 import pygame
 
+# B
+BOSS_SHOT_CENTER_INTERVAL = 4000  # 4 segundos
+BOSS_SHOT_DOUBLE_INTERVAL = 2000  # 2 segundos
+
 # C
 C_ORANGE = 255, 128, 0
 C_CYAN = 0, 206, 209
@@ -19,6 +23,10 @@ ENTITY_SPEED = {
     'Level2BG2': 2,
     'Level2BG3': 3,
 
+    'Level3BG0': 0,
+    'Level3BG1': 1,
+    'Level3BG2': 2,
+
     'Ship_Player1': 3,
     'Ship_Player1_Shot': 4,
     'Ship_Player2': 3,
@@ -28,6 +36,10 @@ ENTITY_SPEED = {
     'Ship_Enemy1_Shot': 3,
     'Ship_Enemy2': 2,
     'Ship_Enemy2_Shot': 4,
+
+    'Ship_EnemyBoss': 3,
+    'Ship_EnemyBossShot0': 3,
+    'Ship_EnemyBossShot1': 4,
 }
 
 ENTITY_HEALTH = {
@@ -41,6 +53,10 @@ ENTITY_HEALTH = {
     'Level2BG2': 999,
     'Level2BG3': 999,
 
+    'Level3BG0': 999,
+    'Level3BG1': 999,
+    'Level3BG2': 999,
+
     'Ship_Player1': 300,
     'Ship_Player1_Shot': 1,
     'Ship_Player2': 300,
@@ -50,6 +66,10 @@ ENTITY_HEALTH = {
     'Ship_Enemy1_Shot': 1,
     'Ship_Enemy2': 80,
     'Ship_Enemy2_Shot': 1,
+
+    'Ship_EnemyBoss': 500,
+    'Ship_EnemyBossShot0': 1,
+    'Ship_EnemyBossShot1': 1,
 }
 
 ENTITY_DAMAGE = {
@@ -63,6 +83,10 @@ ENTITY_DAMAGE = {
     'Level2BG2': 0,
     'Level2BG3': 0,
 
+    'Level3BG0': 0,
+    'Level3BG1': 0,
+    'Level3BG2': 0,
+
     'Ship_Player1': 1,
     'Ship_Player1_Shot': 25,
     'Ship_Player2': 1,
@@ -72,6 +96,10 @@ ENTITY_DAMAGE = {
     'Ship_Enemy1_Shot': 30,
     'Ship_Enemy2': 1,
     'Ship_Enemy2_Shot': 50,
+
+    'Ship_EnemyBoss': 20,
+    'Ship_EnemyBossShot0': 90,
+    'Ship_EnemyBossShot1': 40,
 }
 
 ENTITY_SCORE = {
@@ -85,6 +113,10 @@ ENTITY_SCORE = {
     'Level2BG2': 0,
     'Level2BG3': 0,
 
+    'Level3BG0': 0,
+    'Level3BG1': 0,
+    'Level3BG2': 0,
+
     'Ship_Player1': 0,
     'Ship_Player1_Shot': 0,
     'Ship_Player2': 0,
@@ -94,6 +126,10 @@ ENTITY_SCORE = {
     'Ship_Enemy1_Shot': 0,
     'Ship_Enemy2': 200,
     'Ship_Enemy2_Shot': 0,
+
+    'Ship_EnemyBoss': 500,
+    'Ship_EnemyBossShot0': 0,
+    'Ship_EnemyBossShot1': 0,
 }
 
 EVENT_ENEMY = pygame.USEREVENT + 1
@@ -150,14 +186,14 @@ SCORE_POS = {'Title': (WIN_WIDTH / 2, 50),
              'EnterName': (WIN_WIDTH / 2, 80),
              'Label': (WIN_WIDTH / 2, 90),
              'Name': (WIN_WIDTH / 2, 110),
-             0: (WIN_WIDTH / 2, 110),
-             1: (WIN_WIDTH / 2, 130),
-             2: (WIN_WIDTH / 2, 150),
-             3: (WIN_WIDTH / 2, 170),
-             4: (WIN_WIDTH / 2, 190),
-             5: (WIN_WIDTH / 2, 210),
-             6: (WIN_WIDTH / 2, 230),
-             7: (WIN_WIDTH / 2, 250),
-             8: (WIN_WIDTH / 2, 270),
-             9: (WIN_WIDTH / 2, 290),
+             0: (WIN_WIDTH / 2, 120),
+             1: (WIN_WIDTH / 2, 140),
+             2: (WIN_WIDTH / 2, 160),
+             3: (WIN_WIDTH / 2, 180),
+             4: (WIN_WIDTH / 2, 200),
+             5: (WIN_WIDTH / 2, 220),
+             6: (WIN_WIDTH / 2, 240),
+             7: (WIN_WIDTH / 2, 260),
+             8: (WIN_WIDTH / 2, 280),
+             9: (WIN_WIDTH / 2, 300),
              }

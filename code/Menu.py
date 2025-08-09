@@ -14,7 +14,7 @@ class Menu:
         self.window_size = (WIN_WIDTH, WIN_HEIGHT)
         self.window = pygame.display.set_mode(self.window_size)
 
-        pygame.display.set_caption("Mountain Shooter - by Alfonso")
+        pygame.display.set_caption("Sky Fighters - by Alfonso")
         self.clock = pygame.time.Clock()
 
         self.background = pygame.transform.scale(
@@ -61,9 +61,9 @@ class Menu:
             # executa o texto do menu
             for i in range(len(MENU_OPTION)):
                 if i == menu_option:
-                    self.menu_text(20, MENU_OPTION[i], C_CYAN, ((WIN_WIDTH / 2), 190 + 30 * i))
+                    self.menu_text(20, MENU_OPTION[i], C_CYAN, ((WIN_WIDTH / 2), 215 + 22 * i))
                 else:
-                    self.menu_text(20, MENU_OPTION[i], C_WHITE, ((WIN_WIDTH / 2), 190 + 30 * i))
+                    self.menu_text(20, MENU_OPTION[i], C_WHITE, ((WIN_WIDTH / 2), 215 + 22 * i))
 
             pygame.display.update()
             self.clock.tick(60)

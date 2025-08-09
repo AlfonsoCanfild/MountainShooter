@@ -75,7 +75,7 @@ class Score:
         pygame.mixer.music.play(-1)
 
         self.window.blit(self.background, (0, 0))
-        self.score_text(32, 'Top 10 Score', C_WHITE, SCORE_POS['Title'])
+        self.score_text(32, '*** Top 10 Score ***', C_ORANGE, SCORE_POS['Title'])
 
         # Cabeçalho fixo com alinhamento por espaçamento
         self.score_text(20, f"{' NAME':<10} {' SCORE':<8} {'  DATE':<10}", C_WHITE, SCORE_POS[
