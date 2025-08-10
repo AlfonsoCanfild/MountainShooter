@@ -3,6 +3,7 @@ from code.Const import WIN_HEIGHT, WIN_WIDTH, MARGIN
 from code.Explosion import Explosion
 from code.Player import Player
 from code.Enemy import Enemy
+from code.Boss import Boss
 import pygame
 import random
 
@@ -32,6 +33,16 @@ class EntityFactory:
                         list_bg.append(Background(f'Level2BG{layer}', (x, 0)))
                 return list_bg
 
+            case 'Level3BG':  # LEVEL 3
+                list_bg = []
+                for layer in range(3):
+                    img = pygame.image.load(f'./assets/Level3BG{layer}.png').convert_alpha()
+                    image_width = img.get_width()
+                    for i in range(2):  # duas cópias do fundo
+                        x = i * image_width
+                        list_bg.append(Background(f'Level3BG{layer}', (x, 0)))
+                return list_bg
+
             case 'Ship_Player1':
                 return [Player('Ship_Player1', (MARGIN, 90))]
 
@@ -51,6 +62,10 @@ class EntityFactory:
                 enemy_height = temp_enemy.rect.height
                 y = random.randint(MARGIN, WIN_HEIGHT - enemy_height - MARGIN)
                 return [Enemy('Ship_Enemy2', (WIN_WIDTH, y))]
+
+            case 'Ship_EnemyBoss':  # Inimigo especial da fase 3, o Boss final
+                boss = Boss()
+                return [boss]
 
     @staticmethod
     def get_explosion(position: tuple):

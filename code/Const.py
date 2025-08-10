@@ -38,8 +38,7 @@ ENTITY_SPEED = {
     'Ship_Enemy2_Shot': 4,
 
     'Ship_EnemyBoss': 3,
-    'Ship_EnemyBossShot0': 3,
-    'Ship_EnemyBossShot1': 4,
+    'Ship_EnemyBoss_Shot': 3,
 }
 
 ENTITY_HEALTH = {
@@ -68,8 +67,7 @@ ENTITY_HEALTH = {
     'Ship_Enemy2_Shot': 1,
 
     'Ship_EnemyBoss': 500,
-    'Ship_EnemyBossShot0': 1,
-    'Ship_EnemyBossShot1': 1,
+    'Ship_EnemyBoss_Shot': 1,
 }
 
 ENTITY_DAMAGE = {
@@ -98,8 +96,7 @@ ENTITY_DAMAGE = {
     'Ship_Enemy2_Shot': 50,
 
     'Ship_EnemyBoss': 20,
-    'Ship_EnemyBossShot0': 90,
-    'Ship_EnemyBossShot1': 40,
+    'Ship_EnemyBoss_Shot': 90,
 }
 
 ENTITY_SCORE = {
@@ -128,8 +125,7 @@ ENTITY_SCORE = {
     'Ship_Enemy2_Shot': 0,
 
     'Ship_EnemyBoss': 500,
-    'Ship_EnemyBossShot0': 0,
-    'Ship_EnemyBossShot1': 0,
+    'Ship_EnemyBoss_Shot': 0,
 }
 
 EVENT_ENEMY = pygame.USEREVENT + 1
@@ -143,6 +139,7 @@ ENTITY_SHOT_DELAY = {
     'Ship_Player2': 10,
     'Ship_Enemy1': 3000,
     'Ship_Enemy2': 4000,
+    'Ship_EnemyBoss': 500,
 }
 
 # F

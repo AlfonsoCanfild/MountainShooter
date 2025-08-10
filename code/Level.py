@@ -9,6 +9,7 @@ from code.Const import LEVEL_SOUND, C_WHITE, WIN_HEIGHT, FONT_TYPE, MENU_OPTION,
     C_GREEN, EVENT_TIMEOUT, TIMEOUT_STEP, TIMEOUT_LEVEL
 from code.Enemy import Enemy
 from code.Entity import Entity
+from code.Boss import Boss
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
 from code.Explosion import Explosion
@@ -43,9 +44,6 @@ class Level:
             self.boss = boss_list[0]
             self.entity_list.extend(boss_list)
 
-            # Timers para tiros do Boss
-            pygame.time.set_timer(pygame.USEREVENT + 10, 2000)  # tiro duplo
-            pygame.time.set_timer(pygame.USEREVENT + 11, 4000)  # tiro central
         else:
             pygame.time.set_timer(EVENT_ENEMY, 2000)
             pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP)
@@ -118,12 +116,6 @@ class Level:
                                 if isinstance(ent, Player) and ent.name == 'Ship_Player2':
                                     player_score[1] = ent.score
                             return True
-                else:
-                    # Tiros do Boss
-                    if event.type == pygame.USEREVENT + 10:  # tiro duplo
-                        self.entity_list.extend(self.boss.shoot_double())
-                    if event.type == pygame.USEREVENT + 11:  # tiro central
-                        self.entity_list.extend(self.boss.shoot_single())
 
                 # Game over se não houver jogador
                 if not any(isinstance(ent, Player) for ent in self.entity_list):
