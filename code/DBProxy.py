@@ -31,7 +31,7 @@ class DBProxy:
         self.connection.commit()
 
 # Sequência de comandos para limpar o banco de dados
-
+#
 # db = DBProxy('DBScore')
 # db.clear_all()
 # db.close()

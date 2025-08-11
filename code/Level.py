@@ -1,57 +1,72 @@
 import random
 import sys
-import pygame
+import pygame.display
 from pygame import Surface, Rect
 from pygame.font import Font
 
 from code.Background import Background
 from code.Const import LEVEL_SOUND, C_WHITE, WIN_HEIGHT, FONT_TYPE, MENU_OPTION, EVENT_ENEMY, \
-    C_GREEN, EVENT_TIMEOUT, TIMEOUT_STEP, TIMEOUT_LEVEL
+    C_GREEN, EVENT_TIMEOUT, TIMEOUT_STEP, TIMEOUT_LEVEL, BOSS_SOUND
 from code.Enemy import Enemy
 from code.Entity import Entity
-from code.Boss import Boss
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
 from code.Explosion import Explosion
 from code.Player import Player
+from code.Boss import Boss
 
 
 class Level:
 
     def __init__(self, window: Surface, name: str, game_mode: str, player_score: list[int]):
+        self.timeout = TIMEOUT_LEVEL if name != "Level3" else 0  # sem tempo na fase do boss
         self.window = window
         self.name = name
         self.game_mode = game_mode
-        self.timeout = TIMEOUT_LEVEL
 
         self.entity_list: list[Entity] = []
         self.entity_list.extend(EntityFactory.get_entity(self.name + 'BG'))
 
-        # Jogadores
+        # Adiciona jogadores mantendo vida acumulada
         player_list = EntityFactory.get_entity('Ship_Player1')
         player = player_list[0]
         player.score = player_score[0]
+        if len(player_score) >= 3 and player_score[2] > 0:
+            player.health = player_score[2]
         self.entity_list.extend(player_list)
+
         if game_mode in [MENU_OPTION[1], MENU_OPTION[2]]:
             player_list = EntityFactory.get_entity('Ship_Player2')
             player = player_list[0]
             player.score = player_score[1]
+            if len(player_score) >= 4 and player_score[3] > 0:
+                player.health = player_score[3]
             self.entity_list.extend(player_list)
 
-        # Boss ou inimigos comuns
-        if self.name == "Level3":
-            boss_list = EntityFactory.get_entity("Ship_EnemyBoss")
-            self.boss = boss_list[0]
-            self.entity_list.extend(boss_list)
+        # Timer só se não for boss
+        if self.name != "Level3":
+            if self.name == "Level2":
+                pygame.time.set_timer(EVENT_ENEMY, 1200)  # aparecem mais inimigos
+            else:
+                pygame.time.set_timer(EVENT_ENEMY, 2000)
+
+            pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP)
 
         else:
-            pygame.time.set_timer(EVENT_ENEMY, 2000)
-            pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP)
+            # Spawn do Boss
+            self.entity_list.extend(EntityFactory.get_entity('Ship_EnemyBoss'))
 
     def run(self, player_score: list[int]):
         pygame.mixer.music.stop()
-        pygame.mixer.music.load(LEVEL_SOUND)
-        pygame.mixer.music.set_volume(0.5)
+
+        # Música diferente para a fase do Boss
+        if self.name == "Level3":
+            pygame.mixer.music.load(BOSS_SOUND)
+            pygame.mixer.music.set_volume(1)
+        else:
+            pygame.mixer.music.load(LEVEL_SOUND)
+            pygame.mixer.music.set_volume(0.5)
+
         pygame.mixer.music.play(-1)
 
         clock = pygame.time.Clock()
@@ -59,16 +74,17 @@ class Level:
         while True:
             self.window.fill((0, 0, 0))
 
-            # Background
+            # Renderiza fundos
             for bg in self.entity_list:
                 if isinstance(bg, Background):
                     bg.move()
                     self.window.blit(bg.surf, bg.rect)
+
                     second_rect = bg.rect.copy()
                     second_rect.x += bg.image_width
                     self.window.blit(bg.surf, second_rect)
 
-            # Entidades
+            # Renderiza entidades
             for ent in self.entity_list[:]:
                 if isinstance(ent, Background):
                     continue
@@ -79,21 +95,24 @@ class Level:
                     self.entity_list.remove(ent)
                     continue
 
-                if isinstance(ent, Player) or (isinstance(ent, Enemy) and ent != getattr(self, "boss", None)):
+                if isinstance(ent, (Player, Enemy, Boss)):
                     shot = ent.shot()
-                    if shot:
-                        self.entity_list.append(shot)
+                    if shot is not None:
+                        if isinstance(shot, list):
+                            self.entity_list.extend(shot)
+                        else:
+                            self.entity_list.append(shot)
 
-                # Remove se sair da tela
-                if ent.rect.right <= 0:
+                if ent.rect.right <= 0 and not isinstance(ent, Player):
                     self.entity_list.remove(ent)
                     continue
 
-                # HUD
                 if ent.name == 'Ship_Player1':
-                    self.level_text(14, f'Player1 - Health: {ent.health} | Score: {ent.score}', C_GREEN, (10, 30))
+                    self.level_text(14, f'Player1 - Health: {ent.health} | Score: {ent.score}',
+                                    C_GREEN, (10, 30))
                 if ent.name == 'Ship_Player2':
-                    self.level_text(14, f'Player2 - Health: {ent.health} | Score: {ent.score}', C_GREEN, (10, 45))
+                    self.level_text(14, f'Player2 - Health: {ent.health} | Score: {ent.score}',
+                                    C_GREEN, (10, 45))
 
                 self.window.blit(ent.surf, ent.rect)
 
@@ -103,41 +122,65 @@ class Level:
                     pygame.quit()
                     sys.exit()
 
-                if self.name != "Level3":
-                    if event.type == EVENT_ENEMY:
-                        choice = random.choice(('Ship_Enemy1', 'Ship_Enemy1', 'Ship_Enemy2'))
-                        self.entity_list.extend(EntityFactory.get_entity(choice))
-                    if event.type == EVENT_TIMEOUT:
-                        self.timeout -= TIMEOUT_STEP
-                        if self.timeout <= 0:
-                            for ent in self.entity_list:
-                                if isinstance(ent, Player) and ent.name == 'Ship_Player1':
-                                    player_score[0] = ent.score
-                                if isinstance(ent, Player) and ent.name == 'Ship_Player2':
-                                    player_score[1] = ent.score
-                            return True
+                if event.type == EVENT_ENEMY and self.name != "Level3":
+                    choice = random.choice(('Ship_Enemy1', 'Ship_Enemy1', 'Ship_Enemy2'))
+                    self.entity_list.extend(EntityFactory.get_entity(choice))
 
-                # Game over se não houver jogador
-                if not any(isinstance(ent, Player) for ent in self.entity_list):
-                    return False
+                if event.type == EVENT_TIMEOUT and self.name != "Level3":
+                    self.timeout -= TIMEOUT_STEP
+                    if self.timeout <= 0:
+                        self._save_player_data(player_score)
+                        return True
 
-            # Fase 3 só termina quando o Boss morrer
-            if self.name == "Level3" and not any(ent == self.boss for ent in self.entity_list):
-                return True
+            # Verifica se jogadores morreram
+            found_player = False
+            for ent in self.entity_list:
+                if isinstance(ent, Player):
+                    found_player = True
+                    break
+            if not found_player:
+                self._save_player_data(player_score)
+                return "game_over"
 
-            # HUD extra
-            self.level_text(14, f'{self.name} - Timeout: {self.timeout / 1000:.1f}s', C_WHITE, (10, 5))
-            self.level_text(14, f'fps: {clock.get_fps():.0f}', C_WHITE, (10, WIN_HEIGHT - 35))
-            self.level_text(14, f'entidades: {len(self.entity_list) - 8}', C_WHITE, (10, WIN_HEIGHT - 20))
+            # Verifica vitória na fase do Boss
+            if self.name == "Level3":
+                boss_alive = any(isinstance(ent, Boss) for ent in self.entity_list)
+                if not boss_alive:
+                    self._save_player_data(player_score)
+                    return "victory"
 
-            EntityMediator.verify_collision(self.entity_list)
-            EntityMediator.verify_healthy(self.entity_list)
+            # HUD
+            if self.name != "Level3":
+                self.level_text(14, f'{self.name} - Timeout: {self.timeout / 1000:.1f}s',
+                                C_WHITE, (10, 5))
+            self.level_text(14, f'fps: {clock.get_fps():.0f}', C_WHITE, (10, WIN_HEIGHT - 20))
+
+            # Colisões
+            EntityMediator.verify_collision(entity_list=self.entity_list)
+            EntityMediator.verify_healthy(entity_list=self.entity_list)
 
             pygame.display.update()
             clock.tick(60)
+
+    def _save_player_data(self, player_score: list[int]):
+        """Salva score e vida atual no player_score para manter entre fases."""
+        for ent in self.entity_list:
+            if isinstance(ent, Player) and ent.name == 'Ship_Player1':
+                player_score[0] = ent.score
+                if len(player_score) < 3:
+                    player_score.append(ent.health)
+                else:
+                    player_score[2] = ent.health
+
+            if isinstance(ent, Player) and ent.name == 'Ship_Player2':
+                player_score[1] = ent.score
+                if len(player_score) < 4:
+                    player_score.append(ent.health)
+                else:
+                    player_score[3] = ent.health
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
         text_font: Font = pygame.font.SysFont(name=FONT_TYPE, size=text_size)
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: Rect = text_surf.get_rect(left=text_pos[0], top=text_pos[1])
-        self.window.blit(text_surf, text_rect)
+        self.window.blit(source=text_surf, dest=text_rect)

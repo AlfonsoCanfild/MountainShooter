@@ -1,9 +1,5 @@
 import pygame
 
-# B
-BOSS_SHOT_CENTER_INTERVAL = 4000  # 4 segundos
-BOSS_SHOT_DOUBLE_INTERVAL = 2000  # 2 segundos
-
 # C
 C_ORANGE = 255, 128, 0
 C_CYAN = 0, 206, 209
@@ -96,7 +92,7 @@ ENTITY_DAMAGE = {
     'Ship_Enemy2_Shot': 50,
 
     'Ship_EnemyBoss': 20,
-    'Ship_EnemyBoss_Shot': 90,
+    'Ship_EnemyBoss_Shot': 60,
 }
 
 ENTITY_SCORE = {
@@ -135,11 +131,11 @@ EVENT_ENEMY_SHOT = pygame.USEREVENT + 2
 EVENT_TIMEOUT = pygame.USEREVENT + 2
 
 ENTITY_SHOT_DELAY = {
-    'Ship_Player1': 10,
-    'Ship_Player2': 10,
+    'Ship_Player1': 15,
+    'Ship_Player2': 15,
     'Ship_Enemy1': 3000,
     'Ship_Enemy2': 4000,
-    'Ship_EnemyBoss': 500,
+    'Ship_EnemyBoss': 1000,
 }
 
 # F
@@ -166,6 +162,8 @@ PLAYER_KEY_SHOT = {'Ship_Player1': pygame.K_SPACE,
                    'Ship_Player2': pygame.K_LCTRL}
 
 # S
+BOSS_SOUND = "./assets/boss_sound.mp3"
+
 MENU_SOUND = "./assets/menu_sound.mp3"
 
 LEVEL_SOUND = "./assets/menu_level.mp3"
@@ -175,6 +173,8 @@ TIMEOUT_STEP = 100
 
 TIMEOUT_LEVEL = 10000
 
+TIMEOUT_SCREEN = 3000
+
 # W
 WIN_WIDTH = 576
 WIN_HEIGHT = 324
@@ -183,14 +183,14 @@ SCORE_POS = {'Title': (WIN_WIDTH / 2, 50),
              'EnterName': (WIN_WIDTH / 2, 80),
              'Label': (WIN_WIDTH / 2, 90),
              'Name': (WIN_WIDTH / 2, 110),
-             0: (WIN_WIDTH / 2, 120),
-             1: (WIN_WIDTH / 2, 140),
-             2: (WIN_WIDTH / 2, 160),
-             3: (WIN_WIDTH / 2, 180),
-             4: (WIN_WIDTH / 2, 200),
-             5: (WIN_WIDTH / 2, 220),
-             6: (WIN_WIDTH / 2, 240),
-             7: (WIN_WIDTH / 2, 260),
-             8: (WIN_WIDTH / 2, 280),
-             9: (WIN_WIDTH / 2, 300),
+             0: (WIN_WIDTH / 2, 110),
+             1: (WIN_WIDTH / 2, 130),
+             2: (WIN_WIDTH / 2, 150),
+             3: (WIN_WIDTH / 2, 170),
+             4: (WIN_WIDTH / 2, 190),
+             5: (WIN_WIDTH / 2, 210),
+             6: (WIN_WIDTH / 2, 230),
+             7: (WIN_WIDTH / 2, 250),
+             8: (WIN_WIDTH / 2, 270),
+             9: (WIN_WIDTH / 2, 290),
              }

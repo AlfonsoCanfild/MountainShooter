@@ -64,8 +64,7 @@ class EntityFactory:
                 return [Enemy('Ship_Enemy2', (WIN_WIDTH, y))]
 
             case 'Ship_EnemyBoss':  # Inimigo especial da fase 3, o Boss final
-                boss = Boss()
-                return [boss]
+                return [Boss()]
 
     @staticmethod
     def get_explosion(position: tuple):
