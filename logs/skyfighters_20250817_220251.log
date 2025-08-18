@@ -1,0 +1,106 @@
+[2025-08-17 22:02:51,562] DEBUG - Logger initialized
+[2025-08-17 22:02:51,562] INFO - Iniciando o jogo SkyFighters
+[2025-08-17 22:02:51,562] INFO - Inicializando classe Game
+[2025-08-17 22:02:52,039] INFO - Inicializando sistema de pontuação
+[2025-08-17 22:02:52,074] DEBUG - Sistema de pontuação inicializado com sucesso
+[2025-08-17 22:02:52,074] INFO - Classe Game inicializada com sucesso
+[2025-08-17 22:02:52,074] INFO - Jogo inicializado com sucesso
+[2025-08-17 22:02:52,075] INFO - Iniciando loop principal do jogo
+[2025-08-17 22:02:52,075] DEBUG - Exibindo menu principal
+[2025-08-17 22:02:52,075] INFO - Inicializando Menu
+[2025-08-17 22:02:52,077] DEBUG - Carregando imagem de fundo do menu
+[2025-08-17 22:02:52,114] INFO - Menu inicializado com sucesso
+[2025-08-17 22:02:52,114] INFO - Iniciando loop do menu
+[2025-08-17 22:02:53,203] INFO - Opção confirmada: NEW GAME 1P
+[2025-08-17 22:02:53,203] INFO - Jogador selecionou modo: NEW GAME 1P
+[2025-08-17 22:02:53,203] INFO - Gerenciando modo de jogo: NEW GAME 1P
+[2025-08-17 22:02:53,204] INFO - Iniciando Level1
+[2025-08-17 22:02:53,204] INFO - Iniciando nível: Level1 com modo: NEW GAME 1P
+[2025-08-17 22:02:53,204] INFO - Inicializando nível: Level1 com modo: NEW GAME 1P
+[2025-08-17 22:02:53,222] DEBUG - Adicionando jogadores ao nível Level1
+[2025-08-17 22:02:53,222] DEBUG - Jogador 1 adicionado com pontuação: 0 e saúde: 300
+[2025-08-17 22:02:53,223] DEBUG - Nível Level1 inicializado com sucesso
+[2025-08-17 22:02:53,223] DEBUG - Configurando música para o nível Level1
+[2025-08-17 22:02:53,223] DEBUG - Música padrão de nível carregada
+[2025-08-17 22:02:53,223] INFO - Iniciando execução do nível Level1
+[2025-08-17 22:02:55,325] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:02:57,429] DEBUG - Criando inimigo do tipo Ship_Enemy2
+[2025-08-17 22:02:59,534] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:03:01,641] DEBUG - Criando inimigo do tipo Ship_Enemy2
+[2025-08-17 22:03:03,731] DEBUG - Criando inimigo do tipo Ship_Enemy2
+[2025-08-17 22:03:05,834] DEBUG - Criando inimigo do tipo Ship_Enemy2
+[2025-08-17 22:03:07,937] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:03:08,318] INFO - Tempo esgotado no nível Level1
+[2025-08-17 22:03:08,318] DEBUG - Salvando dados dos jogadores
+[2025-08-17 22:03:08,318] DEBUG - Dados do Jogador 1 salvos: score=800, health=220
+[2025-08-17 22:03:08,318] INFO - Nível Level1 finalizado com resultado: True
+[2025-08-17 22:03:08,319] INFO - Nível Level1 finalizado com resultado: True
+[2025-08-17 22:03:08,319] INFO - Level1 concluído com sucesso, avançando para Level2
+[2025-08-17 22:03:08,319] INFO - Exibindo tela de transição: assets/tela_2_fase.png
+[2025-08-17 22:03:11,352] DEBUG - Tela de transição concluída
+[2025-08-17 22:03:11,352] INFO - Iniciando nível: Level2 com modo: NEW GAME 1P
+[2025-08-17 22:03:11,352] INFO - Inicializando nível: Level2 com modo: NEW GAME 1P
+[2025-08-17 22:03:11,373] DEBUG - Adicionando jogadores ao nível Level2
+[2025-08-17 22:03:11,373] DEBUG - Jogador 1 adicionado com pontuação: 800 e saúde: 220
+[2025-08-17 22:03:11,373] DEBUG - Nível Level2 inicializado com sucesso
+[2025-08-17 22:03:11,373] DEBUG - Configurando música para o nível Level2
+[2025-08-17 22:03:11,374] DEBUG - Música padrão de nível carregada
+[2025-08-17 22:03:11,374] INFO - Iniciando execução do nível Level2
+[2025-08-17 22:03:11,377] DEBUG - Criando inimigo do tipo Ship_Enemy2
+[2025-08-17 22:03:12,484] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:03:13,581] DEBUG - Criando inimigo do tipo Ship_Enemy2
+[2025-08-17 22:03:14,677] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:03:15,784] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:03:16,882] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:03:17,991] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:03:19,081] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:03:20,187] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:03:21,282] DEBUG - Criando inimigo do tipo Ship_Enemy2
+[2025-08-17 22:03:22,389] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:03:23,483] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:03:24,599] DEBUG - Criando inimigo do tipo Ship_Enemy2
+[2025-08-17 22:03:25,682] DEBUG - Criando inimigo do tipo Ship_Enemy2
+[2025-08-17 22:03:26,784] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:03:27,885] DEBUG - Criando inimigo do tipo Ship_Enemy2
+[2025-08-17 22:03:28,988] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:03:30,096] DEBUG - Criando inimigo do tipo Ship_Enemy2
+[2025-08-17 22:03:31,187] DEBUG - Criando inimigo do tipo Ship_Enemy1
+[2025-08-17 22:03:31,482] INFO - Tempo esgotado no nível Level2
+[2025-08-17 22:03:31,482] DEBUG - Salvando dados dos jogadores
+[2025-08-17 22:03:31,482] DEBUG - Dados do Jogador 1 salvos: score=1900, health=130
+[2025-08-17 22:03:31,482] INFO - Nível Level2 finalizado com resultado: True
+[2025-08-17 22:03:31,482] INFO - Nível Level2 finalizado com resultado: True
+[2025-08-17 22:03:31,483] INFO - Level2 concluído com sucesso, avançando para Level3
+[2025-08-17 22:03:31,483] INFO - Exibindo tela de transição: assets/tela_3_fase.png
+[2025-08-17 22:03:34,512] DEBUG - Tela de transição concluída
+[2025-08-17 22:03:34,512] INFO - Iniciando nível: Level3 com modo: NEW GAME 1P
+[2025-08-17 22:03:34,512] INFO - Inicializando nível: Level3 com modo: NEW GAME 1P
+[2025-08-17 22:03:34,528] DEBUG - Adicionando jogadores ao nível Level3
+[2025-08-17 22:03:34,528] DEBUG - Jogador 1 adicionado com pontuação: 1900 e saúde: 130
+[2025-08-17 22:03:34,530] DEBUG - Nível Level3 inicializado com sucesso
+[2025-08-17 22:03:34,530] DEBUG - Configurando música para o nível Level3
+[2025-08-17 22:03:34,532] DEBUG - Música do Boss carregada
+[2025-08-17 22:03:34,532] INFO - Iniciando execução do nível Level3
+[2025-08-17 22:03:47,931] INFO - Boss derrotado! Vitória alcançada
+[2025-08-17 22:03:47,931] DEBUG - Salvando dados dos jogadores
+[2025-08-17 22:03:47,931] DEBUG - Dados do Jogador 1 salvos: score=2400, health=10
+[2025-08-17 22:03:47,931] INFO - Nível Level3 finalizado com resultado: victory
+[2025-08-17 22:03:47,932] INFO - Nível Level3 finalizado com resultado: victory
+[2025-08-17 22:03:47,932] INFO - Jogador venceu o nível
+[2025-08-17 22:03:47,932] INFO - Level3 concluído com sucesso, jogo finalizado com vitória
+[2025-08-17 22:03:47,933] INFO - Exibindo tela de transição: assets/tela_vitoria.png
+[2025-08-17 22:03:50,979] DEBUG - Tela de transição concluída
+[2025-08-17 22:03:50,979] INFO - Salvando pontuação: modo=NEW GAME 1P, pontuação=[2400, 0, 10, 0]
+[2025-08-17 22:03:53,826] INFO - Exibindo tela de pontuações
+[2025-08-17 22:03:59,592] DEBUG - Exibindo menu principal
+[2025-08-17 22:03:59,592] INFO - Inicializando Menu
+[2025-08-17 22:03:59,593] DEBUG - Carregando imagem de fundo do menu
+[2025-08-17 22:03:59,627] INFO - Menu inicializado com sucesso
+[2025-08-17 22:03:59,627] INFO - Iniciando loop do menu
+[2025-08-17 22:04:01,288] DEBUG - Opção selecionada: NEW GAME 2P - COOPERATIVE
+[2025-08-17 22:04:01,487] DEBUG - Opção selecionada: NEW GAME 2P - COMPETITIVE
+[2025-08-17 22:04:01,650] DEBUG - Opção selecionada: SCORE
+[2025-08-17 22:04:01,845] DEBUG - Opção selecionada: EXIT
+[2025-08-17 22:04:02,624] INFO - Opção confirmada: EXIT
+[2025-08-17 22:04:02,624] INFO - Jogador selecionou sair do jogo
+[2025-08-17 22:04:02,696] INFO - Encerrando o jogo

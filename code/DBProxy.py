@@ -1,8 +1,8 @@
 import sqlite3
 
 
+# Classe para armazenar os dados salvos em Banco de Dados
 class DBProxy:
-
     def __init__(self, db_name: str):
         self.db_name = db_name
         self.connection = sqlite3.connect(db_name)
@@ -30,8 +30,8 @@ class DBProxy:
         self.connection.execute('DELETE FROM dados')
         self.connection.commit()
 
+
 # Sequência de comandos para limpar o banco de dados
-#
 # db = DBProxy('DBScore')
 # db.clear_all()
 # db.close()

@@ -4,6 +4,7 @@ from code.Entity import Entity
 from code.Const import ENTITY_SPEED, ENTITY_SHOT_DELAY
 
 
+# Classe para controlar os tiros dos inimigos
 class Enemy(Entity):
     def __init__(self, name: str, position: tuple):
         super().__init__(name, position)
@@ -21,4 +22,3 @@ class Enemy(Entity):
                 name=f'{self.name}_Shot',
                 position=(self.rect.left, self.rect.centery))  # Ajustando o tiro
         return None
-

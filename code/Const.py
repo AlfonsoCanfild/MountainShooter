@@ -171,7 +171,9 @@ LEVEL_SOUND = "./assets/menu_level.mp3"
 # T
 TIMEOUT_STEP = 100
 
-TIMEOUT_LEVEL = 10000
+TIMEOUT_LEVEL1 = 15000  # 15 segundos para a fase 1
+TIMEOUT_LEVEL2 = 23000  # 23 segundos para a fase 2, três a mais para o tempo de tela
+
 
 TIMEOUT_SCREEN = 3000
 

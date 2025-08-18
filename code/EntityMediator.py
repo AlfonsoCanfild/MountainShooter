@@ -16,6 +16,7 @@ class EntityMediator:
         if isinstance(ent, PlayerShot):
             if ent.rect.left >= WIN_WIDTH:
                 ent.health = 0
+                ent.should_explode = False
         if isinstance(ent, EnemyShot):
             if ent.rect.right <= 0:
                 ent.health = 0
@@ -32,7 +33,7 @@ class EntityMediator:
         elif isinstance(ent1, EnemyShot) and isinstance(ent2, Player):
             valid_interaction = True
 
-        if valid_interaction:  # aqui é se for True, embaixo verifica se houve colisão
+        if valid_interaction:  # Se for True, verifica se houve colisão
             if (ent1.rect.right >= ent2.rect.left and ent1.rect.left <= ent2.rect.right and
                     ent1.rect.bottom >= ent2.rect.top and ent1.rect.top <= ent2.rect.bottom):
                 ent1.health -= ent2.damage
@@ -51,7 +52,7 @@ class EntityMediator:
                 if ent.name == 'Ship_Player2':
                     ent.score += enemy.score
 
-    @staticmethod
+    @staticmethod  # verifica colisões
     def verify_collision(entity_list: list[Entity]):
         for i in range(len(entity_list)):
             entity1 = entity_list[i]
@@ -60,15 +61,15 @@ class EntityMediator:
                 entity2 = entity_list[j]
                 EntityMediator.__verify_collision_entity(entity1, entity2)
 
-    @staticmethod
+    @staticmethod  # verifica a saúde das entidades
     def verify_healthy(entity_list: list[Entity]):
-        for ent in entity_list[:]:  # copia da lista
+        for ent in entity_list[:]:
             if ent.health <= 0:
                 if isinstance(ent, Enemy):
                     EntityMediator.__give_score(ent, entity_list)
 
-                # Cria a explosão no local da entidade destruída
-                explosion = EntityFactory.get_explosion(ent.rect.center)
-                entity_list.append(explosion)
+                if getattr(ent, "should_explode", True):
+                    explosion = EntityFactory.get_explosion(ent.rect.center)
+                    entity_list.append(explosion)
 
                 entity_list.remove(ent)

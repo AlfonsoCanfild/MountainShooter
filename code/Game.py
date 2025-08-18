@@ -3,61 +3,135 @@ from code.Level import Level
 from code.Menu import Menu
 from code.Const import WIN_WIDTH, WIN_HEIGHT, MENU_OPTION, TIMEOUT_SCREEN
 from code.Score import Score
+from code.GameState import GameState, GameStateType
+from code.Logger import Logger
 
 
+# Classe principal que gerencia o fluxo do jogo
 class Game:
+
     def __init__(self):
+        self.logger = Logger()
+        self.logger.info("Inicializando a classe Game...")  # log
         pygame.init()
         self.window = pygame.display.set_mode(size=(WIN_WIDTH, WIN_HEIGHT))
+        pygame.display.set_caption("Sky Fighters")
+        self.score = Score(self.window)
+        self.state = GameState()
+        self.logger.info("Classe Game inicializada com sucesso...")  # log
 
-    def show_phase_text(self, image_file, delay=TIMEOUT_SCREEN):
+    def show_transition(self, image_file, delay=TIMEOUT_SCREEN):
+        """Exibe uma tela de transição entre fases.
+
+        Args:
+            image_file: Caminho para a imagem a ser exibida
+            delay: Tempo de exibição em milissegundos
+        """
+        self.logger.info(f"Exibindo tela de transição: {image_file}")
+        self.state.change_state(GameStateType.TRANSITION,
+                                transition_image=image_file,
+                                transition_delay=delay)
+
         background = pygame.image.load(image_file).convert()
         background = pygame.transform.scale(background, (WIN_WIDTH, WIN_HEIGHT))
         self.window.blit(background, (0, 0))
         pygame.display.update()
         pygame.time.delay(delay)
+        self.logger.debug("Tela de transição concluída")
 
+    def run_level(self, level_name, menu_return, player_score):
+        """Executa um nível específico do jogo.
+        
+        Args:
+            level_name: Nome do nível a ser executado
+            menu_return: Modo de jogo selecionado
+            player_score: Lista com pontuações dos jogadores
+            
+        Returns:
+            Resultado da execução do nível (True, "game_over" ou "victory")
+        """
+        self.logger.info(f"Iniciando nível: {level_name} com modo: {menu_return}")
+        self.state.change_state(GameStateType.PLAYING,
+                                level_name=level_name,
+                                game_mode=menu_return,
+                                player_score=player_score)
+
+        level = Level(self.window, level_name, menu_return, player_score)
+        result = level.run(player_score)
+
+        self.logger.info(f"Nível {level_name} finalizado com resultado: {result}")
+
+        if result == "game_over":
+            self.state.change_state(GameStateType.GAME_OVER)
+            self.logger.info("Jogador foi derrotado")
+        elif result == "victory":
+            self.state.change_state(GameStateType.VICTORY)
+            self.logger.info("Jogador venceu o nível")
+
+        return result
+
+    def handle_game_mode(self, menu_return):
+        """Gerencia o fluxo do jogo com base no modo selecionado.
+        
+        Args:
+            menu_return: Modo de jogo selecionado no menu
+        """
+        self.logger.info(f"Gerenciando modo de jogo: {menu_return}")
+        # Reinicia o estado do jogo para uma nova partida
+        self.state.reset_game()
+        self.state.game_mode = menu_return
+        player_score = self.state.player_score
+
+        # Nível 1
+        self.logger.info("Iniciando Level1")
+        level_return = self.run_level('Level1', menu_return, player_score)
+
+        # Nível 2 (se passou do nível 1)
+        if level_return is True:
+            self.logger.info("Level 1 concluído com sucesso, avançando para Level2")  # log
+            self.show_transition("assets/tela_2_fase.png")
+            level_return = self.run_level('Level2', menu_return, player_score)
+
+            # Nível 3/Boss (se passou do nível 2)
+            if level_return is True:
+                self.logger.info("Level 2 concluído com sucesso, avançando para Level3 - Boss")
+                self.show_transition("assets/tela_3_fase.png")
+                level_return = self.run_level('Level3', menu_return, player_score)
+
+                if level_return == "victory":
+                    self.logger.info("Level 3 concluído, Boss derrotado, jogo finalizado com "
+                                     "vitória")  # log
+                    self.show_transition("assets/tela_vitoria.png", delay=TIMEOUT_SCREEN)
+                    self.score.save(menu_return, player_score)
+                elif level_return == "game_over":
+                    self.logger.info("Derrota no Level 3, Boss venceu, jogo finalizado")  # log
+                    self.show_transition("assets/tela_gameOver.png", delay=TIMEOUT_SCREEN)
+            elif level_return == "game_over":
+                self.logger.info("Derrota no Level 2, jogo finalizado")  # log
+                self.show_transition("assets/tela_gameOver.png", delay=TIMEOUT_SCREEN)
+        elif level_return == "game_over":
+            self.logger.info("Derrota no Level 1, jogo finalizado")  # log
+            self.show_transition("assets/tela_gameOver.png", delay=TIMEOUT_SCREEN)
+
+    #  Loop principal do jogo
     def run(self):
+        self.logger.info("Iniciando o loop principal do jogo")  # log
         while True:
-            score = Score(self.window)
+            # Estado inicial, menu completo
+            self.logger.debug("Exibindo menu principal na tela")  # log
+            self.state.change_state(GameStateType.MENU)
             menu = Menu()
             menu_return = menu.run()
 
-            if menu_return in [MENU_OPTION[0], MENU_OPTION[1], MENU_OPTION[2]]:
-                player_score = [0, 0, 0, 0]
-
-                # 1ª fase
-                level = Level(self.window, 'Level1', menu_return, player_score)
-                level_return = level.run(player_score)
-
-                # 2ª fase
-                if level_return is True:
-                    self.show_phase_text("assets/tela_2_fase.png")
-                    level = Level(self.window, 'Level2', menu_return, player_score)
-                    level_return = level.run(player_score)
-
-                    # 3ª fase (Boss)
-                    if level_return is True:
-                        self.show_phase_text("assets/tela_3_fase.png")
-                        level = Level(self.window, 'Level3', menu_return, player_score)
-                        level_return = level.run(player_score)
-
-                        if level_return == "victory":
-                            self.show_phase_text("assets/tela_vitoria.png", delay=TIMEOUT_SCREEN)
-                            score.save(menu_return, player_score)
-
-                        elif level_return == "game_over":
-                            self.show_phase_text("assets/tela_gameOver.png", delay=TIMEOUT_SCREEN)
-
-                    elif level_return == "game_over":
-                        self.show_phase_text("assets/tela_gameOver.png", delay=TIMEOUT_SCREEN)
-
-                elif level_return == "game_over":
-                    self.show_phase_text("assets/tela_gameOver.png", delay=TIMEOUT_SCREEN)
-
-            elif menu_return == MENU_OPTION[3]:
-                score.show()
-
-            elif menu_return == MENU_OPTION[4]:
+            if menu_return in [MENU_OPTION[0], MENU_OPTION[1], MENU_OPTION[2]]:  # modos de jogo
+                self.logger.info(f"Jogador selecionou o modo: {menu_return}")  # log
+                self.handle_game_mode(menu_return)
+            elif menu_return == MENU_OPTION[3]:  # Score do jogo
+                self.logger.info("Consultar o score do jogo")  # log
+                self.state.change_state(GameStateType.SCORE)
+                self.score.show()
+            elif menu_return == MENU_OPTION[4]:  # sair
+                self.logger.info("Saindo do jogo")  # log
+                self.state.change_state(GameStateType.QUIT)
                 pygame.quit()
                 quit()

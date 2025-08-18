@@ -8,11 +8,15 @@ from pygame.font import Font
 from code.Const import WIN_WIDTH, WIN_HEIGHT, MENU_SOUND, FONT_TYPE, C_ORANGE, SCORE_POS, \
     MENU_OPTION, C_WHITE
 from code.DBProxy import DBProxy
+from code.Logger import Logger
 
 
 class Score:
 
     def __init__(self, window):
+        self.logger = Logger()
+        self.logger.info("Inicializando sistema de pontuação")
+        
         self.window_size = (WIN_WIDTH, WIN_HEIGHT)
         self.window = pygame.display.set_mode(self.window_size)
         pygame.display.set_caption("Mountain Shooter - by Alfonso")
@@ -22,8 +26,11 @@ class Score:
             pygame.image.load("assets/tela_inicial_sem_titulo.png"),
             self.window_size
         )
+        
+        self.logger.debug("Sistema de pontuação inicializado com sucesso")
 
     def save(self, game_mode: str, player_score: list[int]):
+        self.logger.info(f"Salvando pontuação: modo={game_mode}, pontuação={player_score}")
         pygame.mixer.music.load(MENU_SOUND)
         pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(-1)
@@ -70,6 +77,7 @@ class Score:
             self.clock.tick(60)
 
     def show(self):
+        self.logger.info("Exibindo tela de pontuações")
         pygame.mixer.music.load(MENU_SOUND)
         pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(-1)

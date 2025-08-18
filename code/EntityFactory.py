@@ -9,13 +9,12 @@ import random
 
 
 class EntityFactory:
-
     @staticmethod
     def get_entity(entity_name: str, position=(0, 0)):
         match entity_name:
             case 'Level1BG':  # LEVEL 1
                 list_bg = []
-                for layer in range(4):
+                for layer in range(4):  # 4 imagens
                     img = pygame.image.load(f'./assets/Level1BG{layer}.png').convert_alpha()
                     image_width = img.get_width()
                     for i in range(2):  # duas cópias do fundo
@@ -25,7 +24,7 @@ class EntityFactory:
 
             case 'Level2BG':  # LEVEL 2
                 list_bg = []
-                for layer in range(4):
+                for layer in range(4):  # 4 imagens
                     img = pygame.image.load(f'./assets/Level2BG{layer}.png').convert_alpha()
                     image_width = img.get_width()
                     for i in range(2):  # duas cópias do fundo
@@ -35,7 +34,7 @@ class EntityFactory:
 
             case 'Level3BG':  # LEVEL 3
                 list_bg = []
-                for layer in range(3):
+                for layer in range(3):  # 3 imagens
                     img = pygame.image.load(f'./assets/Level3BG{layer}.png').convert_alpha()
                     image_width = img.get_width()
                     for i in range(2):  # duas cópias do fundo
@@ -66,6 +65,7 @@ class EntityFactory:
             case 'Ship_EnemyBoss':  # Inimigo especial da fase 3, o Boss final
                 return [Boss()]
 
+    # Responsável pelas explosões dos tiros
     @staticmethod
     def get_explosion(position: tuple):
         frames = []
