@@ -1,9 +1,9 @@
 import random
 import sys
 import pygame.display
+
 from pygame import Surface, Rect
 from pygame.font import Font
-
 from code.Background import Background
 from code.Const import LEVEL_SOUND, C_WHITE, WIN_HEIGHT, FONT_TYPE, MENU_OPTION, EVENT_ENEMY, \
     C_GREEN, EVENT_TIMEOUT, TIMEOUT_STEP, TIMEOUT_LEVEL1, TIMEOUT_LEVEL2, BOSS_SOUND

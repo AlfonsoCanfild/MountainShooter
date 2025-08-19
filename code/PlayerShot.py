@@ -1,9 +1,9 @@
 from abc import ABC
-
 from code.Const import ENTITY_SPEED
 from code.Entity import Entity
 
 
+# Classe responsável pelos tiros do Player
 class PlayerShot(Entity, ABC):
     def __init__(self, name: str, position: tuple):
         super().__init__(name, position)

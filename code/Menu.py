@@ -1,18 +1,16 @@
 import pygame
-import sys
+
 from pygame import Surface, Rect
 from pygame.font import Font
-
 from code.Const import WIN_WIDTH, WIN_HEIGHT, MENU_SOUND, MENU_OPTION, \
     C_WHITE, C_CYAN, FONT_TYPE
 from code.Logger import Logger
 
 
 class Menu:
-    def __init__(self):
-        """Inicializa o menu do jogo."""
+    def __init__(self):  # Inicializa o menu do jogo
         self.logger = Logger()
-        self.logger.info("Inicializando Menu")
+        self.logger.info("Inicializando Menu")  # log
         
         pygame.init()
 
@@ -24,7 +22,7 @@ class Menu:
         self.clock = pygame.time.Clock()
 
         # Carrega a imagem de fundo
-        self.logger.debug("Carregando imagem de fundo do menu")
+        self.logger.debug("Carregando imagem de fundo do menu")  # log
         self.background = pygame.transform.scale(
             pygame.image.load("assets/tela_inicial_com_titulo.png"),
             self.window_size
@@ -38,16 +36,12 @@ class Menu:
         text_rect: Rect = text_surf.get_rect(center=text_center_pos)
         self.window.blit(source=text_surf, dest=text_rect)
 
+    # Executa o loop principal do menu
     def run(self):
-        """Executa o loop principal do menu.
-        
-        Returns:
-            Opção selecionada pelo jogador
-        """
-        self.logger.info("Iniciando loop do menu")
+        self.logger.info("Iniciando loop do menu")  # log
         menu_option = 0
 
-        # play the menu sound
+        # Toca a música do Menu
         pygame.mixer.music.load(MENU_SOUND)
         pygame.mixer.music.set_volume(0.5)  # volume - 0.0 e 1.0
         pygame.mixer.music.play(-1)  # faz a música repetir
@@ -56,7 +50,7 @@ class Menu:
             # Verifica os eventos do usuário, o que foi clicado
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.logger.info("Evento de saída detectado no menu")
+                    self.logger.info("Evento de saída detectado no menu")  # log
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
@@ -65,16 +59,16 @@ class Menu:
                             menu_option += 1
                         else:
                             menu_option = 0
-                        self.logger.debug(f"Opção selecionada: {MENU_OPTION[menu_option]}")
+                        self.logger.debug(f"Opção selecionada: {MENU_OPTION[menu_option]}")  # log
                     if event.key == pygame.K_UP:  # tecla pra cima
                         if menu_option > 0:
                             menu_option -= 1
                         else:
                             menu_option = len(MENU_OPTION) - 1
-                        self.logger.debug(f"Opção selecionada: {MENU_OPTION[menu_option]}")
+                        self.logger.debug(f"Opção selecionada: {MENU_OPTION[menu_option]}")  # log
                     if event.key == pygame.K_RETURN:  # tecla enter
                         selected_option = MENU_OPTION[menu_option]
-                        self.logger.info(f"Opção confirmada: {selected_option}")
+                        self.logger.info(f"Opção confirmada: {selected_option}")  # log
                         return selected_option
 
             self.window.blit(self.background, (0, 0))

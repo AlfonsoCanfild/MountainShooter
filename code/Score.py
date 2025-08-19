@@ -1,10 +1,9 @@
 import sys
-from datetime import datetime
-
 import pygame
+
 from pygame import Surface, Rect, KEYDOWN, K_RETURN, K_BACKSPACE, K_ESCAPE
 from pygame.font import Font
-
+from datetime import datetime
 from code.Const import WIN_WIDTH, WIN_HEIGHT, MENU_SOUND, FONT_TYPE, C_ORANGE, SCORE_POS, \
     MENU_OPTION, C_WHITE
 from code.DBProxy import DBProxy
@@ -15,7 +14,7 @@ class Score:
 
     def __init__(self, window):
         self.logger = Logger()
-        self.logger.info("Inicializando sistema de pontuação")
+        self.logger.info("Inicializando sistema de pontuação")  # log
         
         self.window_size = (WIN_WIDTH, WIN_HEIGHT)
         self.window = pygame.display.set_mode(self.window_size)
@@ -36,6 +35,10 @@ class Score:
         pygame.mixer.music.play(-1)
         db_proxy = DBProxy('DBScore')
         name = ''
+
+        # Inicialização padrão para evitar erro caso nenhuma condição seja atendida
+        score = 0
+        text = "Enter your name (4 chars):"
 
         while True:
             self.window.blit(self.background, (0, 0))  # ← limpa a tela

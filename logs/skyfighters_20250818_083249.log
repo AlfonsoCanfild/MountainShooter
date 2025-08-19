@@ -1,0 +1,20 @@
+[2025-08-18 08:32:49,782] DEBUG - Logger initialized
+[2025-08-18 08:32:49,782] INFO - Iniciando o jogo SkyFighters...
+[2025-08-18 08:32:49,782] INFO - Inicializando a classe Game...
+[2025-08-18 08:32:50,380] INFO - Inicializando sistema de pontuação
+[2025-08-18 08:32:50,415] DEBUG - Sistema de pontuação inicializado com sucesso
+[2025-08-18 08:32:50,415] INFO - Classe Game inicializada com sucesso...
+[2025-08-18 08:32:50,416] INFO - Jogo inicializado com sucesso...
+[2025-08-18 08:32:50,416] INFO - Iniciando o loop principal do jogo
+[2025-08-18 08:32:50,416] DEBUG - Exibindo menu principal na tela
+[2025-08-18 08:32:50,416] INFO - Inicializando Menu
+[2025-08-18 08:32:50,418] DEBUG - Carregando imagem de fundo do menu
+[2025-08-18 08:32:50,455] INFO - Menu inicializado com sucesso
+[2025-08-18 08:32:50,455] INFO - Iniciando loop do menu
+[2025-08-18 08:32:53,323] DEBUG - Opção selecionada: NEW GAME 2P - COOPERATIVE
+[2025-08-18 08:32:53,490] DEBUG - Opção selecionada: NEW GAME 2P - COMPETITIVE
+[2025-08-18 08:32:53,620] DEBUG - Opção selecionada: SCORE
+[2025-08-18 08:32:53,783] DEBUG - Opção selecionada: EXIT
+[2025-08-18 08:32:54,444] INFO - Opção confirmada: EXIT
+[2025-08-18 08:32:54,445] INFO - Saindo do jogo
+[2025-08-18 08:32:54,544] INFO - Encerrando o jogo...
