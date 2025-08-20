@@ -1,4 +1,5 @@
 import pygame
+import sys
 from code.Level import Level
 from code.Menu import Menu
 from code.Const import WIN_WIDTH, WIN_HEIGHT, MENU_OPTION, TIMEOUT_SCREEN
@@ -118,4 +119,4 @@ class Game:
                 self.logger.info("Saindo do jogo")  # log
                 self.state.change_state(GameStateType.QUIT)
                 pygame.quit()
-                quit()
+                sys.exit()
