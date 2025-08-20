@@ -67,6 +67,7 @@ class Game:
 
         # Nível 1
         self.logger.info("Iniciando Level1")  # log
+        self.show_transition("assets/tela_info.png")
         level_return = self.run_level('Level1', menu_return, player_score)
 
         # Nível 2 (se passou do nível 1)

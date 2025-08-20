@@ -1,6 +1,4 @@
 import logging
-import os
-from datetime import datetime
 
 
 # Classe responsável por gerenciar o sistema de logs do jogo
@@ -16,22 +14,9 @@ class Logger:
 
     # Inicializa o logger com configurações padrão
     def _initialize_logger(self):
-        # Cria diretório de logs se não existir
-        log_dir = "logs"
-        if not os.path.exists(log_dir):
-            os.makedirs(log_dir)
-
-        # Configura o nome do arquivo de log com timestamp
-        timestamp = datetime.now().strftime("%d-%m-%Y_%H-%M")
-        log_file = os.path.join(log_dir, f"skyfighters_{timestamp}.log")
-
-        # Configura o logger
+        # Configura o logger apenas para console (sem arquivo de log)
         self.logger = logging.getLogger("SkyFighters")
         self.logger.setLevel(logging.DEBUG)
-
-        # Handler para arquivo
-        file_handler = logging.FileHandler(log_file)
-        file_handler.setLevel(logging.DEBUG)
 
         # Handler para console
         console_handler = logging.StreamHandler()
@@ -42,11 +27,9 @@ class Logger:
             '[%(asctime)s] %(levelname)s - %(message)s',
             datefmt='%d-%m-%Y %H:%M'
         )
-        file_handler.setFormatter(formatter)
         console_handler.setFormatter(formatter)
 
-        # Adiciona handlers ao logger
-        self.logger.addHandler(file_handler)
+        # Adiciona apenas o handler de console
         self.logger.addHandler(console_handler)
 
         self.debug("Logger initialized")

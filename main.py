@@ -4,7 +4,7 @@ import sys
 from code.Game import Game
 from code.Logger import Logger
 
-# Inicializa o logger (verificar se tudos está funcionando)
+# Inicializa o logger (apenas console, sem arquivo de log)
 logger = Logger()
 logger.info("Iniciando o jogo SkyFighters...")  # log
 
